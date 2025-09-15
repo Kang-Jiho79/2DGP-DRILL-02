@@ -6,50 +6,34 @@ open_canvas()
 grass = load_image('grass.png')
 character = load_image('character.png')
 
-x = 400
+x = 402
 y = 90
-while x < 780:
-    clear_canvas()
-    grass.draw(400, 30)
-    character.draw(x, y)
-    x += 2
-    delay(0.01)
-    update_canvas()
-while y < 560:
-    clear_canvas()
-    grass.draw(400, 30)
-    character.draw(x, y)
-    y += 2
-    delay(0.01)
-    update_canvas()
-while x > 10:
-    clear_canvas()
-    grass.draw(400, 30)
-    character.draw(x, y)
-    x -= 2
-    delay(0.01)
-    update_canvas()
-while y > 90:
-    clear_canvas()
-    grass.draw(400, 30)
-    character.draw(x, y)
-    y -= 2
-    delay(0.01)
-    update_canvas()
-while x <400:
-    clear_canvas()
-    grass.draw(400, 30)
-    character.draw(x, y)
-    x += 2
-    delay(0.01)
-    update_canvas()
+angle = -90
 
-for i in range(-90, -90 - 360, -1):
+while True:
     clear_canvas()
     grass.draw(400, 30)
     character.draw(x, y)
-    x=400 + 240 * math.cos(math.radians(i))
-    y=330 + 240 * math.sin(math.radians(i))
+    if x == 400 and y == 90:
+        x = 400 + 240 * math.cos(math.radians(angle))
+        y = 330 + 240 * math.sin(math.radians(angle))
+        angle -= 2
+    elif x < 780 and y == 90:
+        x += 2
+    elif x == 780 and y < 560:
+        y += 2
+    elif x > 10 and y == 560:
+        x -= 2
+    elif x == 10 and y > 90:
+        y -= 2
+    else:
+        x = 400 + 240 * math.cos(math.radians(angle))
+        y = 330 + 240 * math.sin(math.radians(angle))
+        angle -= 2
+        if angle == -90 - 360:
+            x = 402
+            y = 90
+            angle = -90
     delay(0.01)
     update_canvas()
 
